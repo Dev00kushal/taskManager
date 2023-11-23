@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 
 const App = () => {
+
+// map,filter,reduce,some
+
   const [todo, setTodo] = useState([]);
-  const [id, setId] = useState(1);
+  const [id, setId] = useState(0);
   const [input, setInput] = useState("");
   const [todoState, setTodoState] = useState("Add");
   const addTodo = () => {
@@ -29,11 +32,22 @@ const App = () => {
 
   const updateValueInput = (index) => {
     setInput(todo[index].todo);
+    setId(index);
     setTodoState("Update");
   };
 
-  const updateValue = (index) => {
-    setTodo([...todo, input]);
+  const updateValue = () => {
+    const updatedTodo = todo.map((value) => {
+      if (id === value.id) {
+        value.todo = input;
+      }
+      return value;
+    });
+    setTodo(updatedTodo);
+    setTodoState("Add");
+    setInput("")
+    setId(todo.length)
+  console.log(todo)  
   };
 
   return (
@@ -51,7 +65,7 @@ const App = () => {
           Add
         </button>
       ) : (
-        <button className="btn btn-danger" onClick={() => updateValue}>
+        <button className="btn btn-danger" onClick={updateValue}>
           Update
         </button>
       )}
