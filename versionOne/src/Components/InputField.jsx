@@ -1,7 +1,6 @@
 import React from "react";
 
 const InputField = ({input,setInput}) => {
-  console.log(input)
   return (
     <>
       <input
@@ -11,6 +10,7 @@ const InputField = ({input,setInput}) => {
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
+      
     </>
   );
 };

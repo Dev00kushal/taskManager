@@ -14,14 +14,16 @@ const App = () => {
   };
   return (
     <>
-      <div className="flex h-screen justify-center items-center space-x-5 ">
+      <div className="flex mt-10 justify-center items-center space-x-5 ">
         <InputField input={input} setInput={setInput} />
-        <Button addTodo={addTodo} btnName="Add" btnColor={"btn-error"} />
-        <Button addTodo={addTodo} btnName="Update" btnColor={"btn-primary"} />
+        <Button addTodo={addTodo} btnName="Add" btnColor={"btn-secondary"} />
       </div>
-      <div className="">
-        <Todo description={todo}  />
+      <div className="ml-9 card w-96 bg-base-100 shadow-xl">
+        {todo.map((items, index) => {
+          return <Todo key={index} description={items} />;
+        })}
       </div>
+      <Button btnColor={"bg-white-100 btn-xl"} btnName={"update"} />
     </>
   );
 };
