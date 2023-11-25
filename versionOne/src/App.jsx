@@ -16,8 +16,8 @@ const App = () => {
   };
   const deleteTodo = (index) => {
     setTodo(
-      todo.filter((_, index) => {
-        return index !== index;
+      todo?.filter((_, idx) => {
+        return idx !== index;
       })
     );
     console.log(index, todo);
@@ -44,7 +44,7 @@ const App = () => {
               <Button
                 btnColor="bg-erro-100 btn-xl"
                 btnName="Delete"
-                deleteTodo={deleteTodo}
+                deleteTodo={() => deleteTodo(index)}
               />
             </div>
           ))
