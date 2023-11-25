@@ -1,11 +1,13 @@
 import React from "react";
-const Button = ({addTodo,btnName,btnColor}) => {
+const Button = ({ addTodo, btnName, btnColor, deleteTodo,btn}) => {
   return (
     <>
-      <button className={`btn ${btnColor}`}
-         onClick={addTodo}
-      
-      >{btnName}</button>
+      <button
+        className={`btn ${btnColor}`}
+        onClick={btn? addTodo : deleteTodo}
+      >
+        {btnName}
+      </button>
     </>
   );
 };
