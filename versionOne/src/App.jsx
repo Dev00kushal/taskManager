@@ -47,7 +47,7 @@ const App = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="mt-5 card w-96 bg-base-100 shadow-xl p-4"
+        className="mt-5 card w-96 bg-base-100 shadow-xl p-4 "
       >
         <AnimatePresence>
           {todo.length !== 0 ? (
@@ -62,12 +62,12 @@ const App = () => {
               >
                 <Todo description={items} />
                 <Button
-                  btnColor="bg-erro-100 btn-xl"
+                  btnColor="btn-error btn-xl"
                   btnName="Delete"
                   deleteTodo={() => deleteTodo(index)}
                 />
                 <Button
-                  btnColor="bg-blue-500 hover:bg-blue-600"
+                  btnColor="bg-blue-500 hover:bg-blue-600 text-white"
                   btnName="Update"
                 />
               </motion.div>
