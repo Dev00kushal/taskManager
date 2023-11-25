@@ -6,24 +6,48 @@ import Todo from "./Components/Todo";
 const App = () => {
   const [todo, setTodo] = useState([]);
   const [input, setInput] = useState("");
+
   const addTodo = () => {
     if (input.length !== 0) {
       setTodo([...todo, input]);
-      setInput(" ");
+      setInput("");
     }
   };
+
   return (
     <>
-      <div className="flex mt-10 justify-center items-center space-x-5 ">
+      <div className="flex mt-10 justify-center items-center space-x-5">
         <InputField input={input} setInput={setInput} />
-        <Button addTodo={addTodo} btnName="Add" btnColor={"btn-secondary"} />
+        <Button addTodo={addTodo} btnName="Add" btnColor="btn-secondary" />
       </div>
+
       <div className="ml-9 card w-96 bg-base-100 shadow-xl">
-        {todo.map((items, index) => {
-          return <Todo key={index} description={items} />;
-        })}
+        {todo.length !== 0 ? (
+          todo.map((items, index) => (
+            <div key={index} className="flex items-center justify-between">
+              <Todo description={items} />
+              <Button btnColor="bg-white-100 btn-xl" btnName="Update" />
+            </div>
+          ))
+        ) : (
+          <div role="alert" className="alert alert-error">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="stroke-current shrink-0 h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span>Missing Todos! No Todos Found</span>
+          </div>
+        )}
       </div>
-      <Button btnColor={"bg-white-100 btn-xl"} btnName={"update"} />
     </>
   );
 };
