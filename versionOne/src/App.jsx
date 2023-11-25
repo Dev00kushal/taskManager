@@ -5,7 +5,7 @@ import Todo from "./Components/Todo";
 
 const App = () => {
   const [todo, setTodo] = useState([]);
-  const [input, setInput] = useState();
+  const [input, setInput] = useState("");
   const addTodo = () => {
     if (input.length !== 0) {
       setTodo([...todo, input]);
@@ -20,7 +20,7 @@ const App = () => {
         <Button addTodo={addTodo} btnName="Update" btnColor={"btn-primary"} />
       </div>
       <div className="">
-        <Todo description={todo} />
+        <Todo description={todo}  />
       </div>
     </>
   );
