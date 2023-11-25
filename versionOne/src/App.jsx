@@ -8,11 +8,18 @@ const App = () => {
   const [todo, setTodo] = useState([]);
   const [input, setInput] = useState("");
   const [btn, setBtn] = useState("Add");
+  const [id, SetId] = useState(0);
+
+  const onUpdate = (index) => {
+    setInput(todo[index]);
+    setBtn("Update");
+  };
 
   const addTodo = () => {
     if (input.length !== 0) {
       setTodo([...todo, input]);
       setInput("");
+      SetId(id + 1);
     }
   };
 
@@ -69,6 +76,7 @@ const App = () => {
                 <Button
                   btnColor="bg-blue-500 hover:bg-blue-600 text-white"
                   btnName="Update"
+                  onUpdate={() => onUpdate(index)}
                 />
               </motion.div>
             ))
