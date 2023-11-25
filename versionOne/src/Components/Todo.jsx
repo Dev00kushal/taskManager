@@ -2,11 +2,9 @@ import React from "react";
 
 const Todo = ({ description }) => {
   return (
-    <>
-      <div className="card-body">
-        <p>{description}</p>
-      </div>
-    </>
+    <div className="border rounded p-3 shadow-md bg-white">
+      <p className="text-gray-800">{description}</p>
+    </div>
   );
 };
 

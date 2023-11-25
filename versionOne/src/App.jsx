@@ -19,6 +19,7 @@ const App = () => {
   const deleteTodo = (index) => {
     setTodo(
       todo?.filter((_, idx) => {
+        console.log(idx, index);
         return idx !== index;
       })
     );
@@ -64,6 +65,10 @@ const App = () => {
                   btnColor="bg-erro-100 btn-xl"
                   btnName="Delete"
                   deleteTodo={() => deleteTodo(index)}
+                />
+                <Button
+                  btnColor="bg-blue-500 hover:bg-blue-600"
+                  btnName="Update"
                 />
               </motion.div>
             ))

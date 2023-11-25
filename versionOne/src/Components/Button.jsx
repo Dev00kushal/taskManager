@@ -1,13 +1,17 @@
 import React from "react";
-const Button = ({ addTodo, btnName, btnColor, deleteTodo,btn}) => {
+import { motion } from "framer-motion";
+
+const Button = ({ addTodo, btnName, btnColor, deleteTodo, btn }) => {
   return (
     <>
-      <button
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
         className={`btn ${btnColor}`}
-        onClick={btn? addTodo : deleteTodo}
+        onClick={btn ? addTodo : deleteTodo}
       >
         {btnName}
-      </button>
+      </motion.button>
     </>
   );
 };
