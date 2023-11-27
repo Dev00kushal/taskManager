@@ -8,18 +8,27 @@ const App = () => {
   const [todo, setTodo] = useState([]);
   const [input, setInput] = useState("");
   const [btn, setBtn] = useState("Add");
-  const [id, SetId] = useState(0);
+  const [id, setId] = useState(0);
 
   const onUpdate = (index) => {
     setInput(todo[index]);
     setBtn("Update");
+    setId(index); 
   };
 
   const addTodo = () => {
     if (input.length !== 0) {
-      setTodo([...todo, input]);
+      if (btn === "Add") {
+        setTodo([...todo, input]);
+      } else if (btn === "Update") {
+        const updatedTodo = [...todo];
+        updatedTodo[id] = input;
+        setTodo(updatedTodo);
+        setId(0);
+      }
+  
       setInput("");
-      SetId(id + 1);
+      setBtn("Add");
     }
   };
 
@@ -30,7 +39,6 @@ const App = () => {
         return idx !== index;
       })
     );
-    setBtn("Delete");
   };
 
   return (
@@ -44,7 +52,7 @@ const App = () => {
         <InputField input={input} setInput={setInput} />
         <Button
           addTodo={addTodo}
-          btnName="Add"
+          btnName={btn}
           btnColor="btn-secondary"
           btn={btn}
         />
