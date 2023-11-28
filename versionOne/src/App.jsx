@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import InputField from "./Components/InputField";
 import Button from "./Components/Button";
 import Todo from "./Components/Todo";
+import CompletedTodo from "./Components/CompletedTodo";
 
 const App = () => {
   // checkbox -> tick hanni if checkbox tick xa vane tyo todo cheii tya bata delte garera completed todo ma haldine
@@ -10,14 +11,20 @@ const App = () => {
   const [input, setInput] = useState("");
   const [btn, setBtn] = useState("Add");
   const [id, setId] = useState(0);
-  const [status, setStatus] = useState("unchecked");
+  const [completed, setCompleted] = useState([]);
+  const [status, setStatus] = useState(false);
   const onUpdate = (index) => {
     setInput(todo[index]);
     setBtn("Update");
     setId(index);
   };
 
-  const checkBox = () => {};
+  const handleCheckBox = () => {
+    if (status) {
+      setCompleted([...todo]);
+    }
+    setStatus(!status);
+  };
 
   const addTodo = () => {
     if (input.length !== 0) {
@@ -38,7 +45,6 @@ const App = () => {
   const deleteTodo = (index) => {
     setTodo(
       todo?.filter((_, idx) => {
-        console.log(idx, index);
         return idx !== index;
       })
     );
@@ -62,7 +68,6 @@ const App = () => {
           btn={btn}
         />
       </motion.div>
-
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -80,6 +85,12 @@ const App = () => {
                 transition={{ duration: 0.5 }}
                 className="flex items-center justify-between mb-3"
               >
+                <input
+                  type="checkbox"
+                  checked={status}
+                  onChange={handleCheckBox}
+                  className="checkbox"
+                />
                 <Todo description={items} />
                 <Button
                   btnColor="btn-error btn-xl"
@@ -91,7 +102,6 @@ const App = () => {
                   btnName="Update"
                   onUpdate={() => onUpdate(index)}
                 />
-                <input type="checkbox" checked={status} className="checkbox" />
               </motion.div>
             ))
           ) : (
@@ -114,6 +124,7 @@ const App = () => {
           )}
         </AnimatePresence>
       </motion.div>
+      {status && <CompletedTodo completed={todo} />}
     </div>
   );
 };
