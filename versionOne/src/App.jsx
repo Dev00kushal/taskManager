@@ -5,16 +5,19 @@ import Button from "./Components/Button";
 import Todo from "./Components/Todo";
 
 const App = () => {
+  // checkbox -> tick hanni if checkbox tick xa vane tyo todo cheii tya bata delte garera completed todo ma haldine
   const [todo, setTodo] = useState([]);
   const [input, setInput] = useState("");
   const [btn, setBtn] = useState("Add");
   const [id, setId] = useState(0);
-
+  const [status, setStatus] = useState("unchecked");
   const onUpdate = (index) => {
     setInput(todo[index]);
     setBtn("Update");
-    setId(index); 
+    setId(index);
   };
+
+  const checkBox = () => {};
 
   const addTodo = () => {
     if (input.length !== 0) {
@@ -26,7 +29,7 @@ const App = () => {
         setTodo(updatedTodo);
         setId(0);
       }
-  
+
       setInput("");
       setBtn("Add");
     }
@@ -39,6 +42,8 @@ const App = () => {
         return idx !== index;
       })
     );
+    setInput(" ");
+    setBtn("Add");
   };
 
   return (
@@ -86,6 +91,7 @@ const App = () => {
                   btnName="Update"
                   onUpdate={() => onUpdate(index)}
                 />
+                <input type="checkbox" checked={status} className="checkbox" />
               </motion.div>
             ))
           ) : (
