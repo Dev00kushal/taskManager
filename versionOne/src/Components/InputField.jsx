@@ -1,6 +1,12 @@
 import React from "react";
 
-const InputField = ({input,setInput}) => {
+const InputField = ({ input, setInput, addTodo }) => {
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      addTodo();
+    }
+  };
+
   return (
     <>
       <input
@@ -9,8 +15,8 @@ const InputField = ({input,setInput}) => {
         className="input input-bordered w-full max-w-xs"
         value={input}
         onChange={(e) => setInput(e.target.value)}
+        onKeyDown={handleKeyDown} 
       />
-      
     </>
   );
 };

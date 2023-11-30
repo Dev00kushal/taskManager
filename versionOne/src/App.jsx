@@ -6,24 +6,39 @@ import Todo from "./Components/Todo";
 import CompletedTodo from "./Components/CompletedTodo";
 
 const App = () => {
-  // checkbox -> tick hanni if checkbox tick xa vane tyo todo cheii tya bata delte garera completed todo ma haldine
   const [todo, setTodo] = useState([]);
   const [input, setInput] = useState("");
   const [btn, setBtn] = useState("Add");
   const [id, setId] = useState(0);
   const [completed, setCompleted] = useState([]);
   const [status, setStatus] = useState(false);
+  const [checkboxStates, setCheckboxStates] = useState([]);
   const onUpdate = (index) => {
     setInput(todo[index]);
     setBtn("Update");
     setId(index);
   };
 
-  const handleCheckBox = () => {
-    if (status) {
-      setCompleted([...todo]);
+  const handleCheckBox = (index) => {
+    setCheckboxStates((prevCheckboxStates) => {
+      const updatedCheckboxStates = [...prevCheckboxStates];
+      updatedCheckboxStates[index] = !updatedCheckboxStates[index];
+      return updatedCheckboxStates;
+    });
+
+    const updatedCompleted = [...completed];
+
+    if (!checkboxStates[index]) {
+      updatedCompleted.push(todo[index]);
+    } else {
+      const completedIndex = updatedCompleted.findIndex(
+        (item) => item === todo[index]
+      );
+      updatedCompleted.splice(completedIndex, 1);
     }
-    setStatus(!status);
+
+    setCompleted(updatedCompleted);
+    setStatus(updatedCompleted.length > 0); // Update status based on completed todos
   };
 
   const addTodo = () => {
@@ -49,6 +64,7 @@ const App = () => {
       })
     );
     setInput(" ");
+    setStatus(!status);
     setBtn("Add");
   };
 
@@ -60,7 +76,7 @@ const App = () => {
         transition={{ duration: 0.5 }}
         className="flex space-x-5"
       >
-        <InputField input={input} setInput={setInput} />
+        <InputField input={input} setInput={setInput} addTodo={addTodo} />
         <Button
           addTodo={addTodo}
           btnName={btn}
@@ -87,8 +103,8 @@ const App = () => {
               >
                 <input
                   type="checkbox"
-                  checked={status}
-                  onChange={handleCheckBox}
+                  checked={checkboxStates[index] || false}
+                  onChange={() => handleCheckBox(index)}
                   className="checkbox"
                 />
                 <Todo description={items} />
@@ -124,7 +140,15 @@ const App = () => {
           )}
         </AnimatePresence>
       </motion.div>
-      {status && <CompletedTodo completed={todo} />}
+      <motion.div
+        className="flex justify-center items-center mt-10  rounded-lg p-6 shadow-md"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.5 }}
+      >
+        {status && <CompletedTodo completed={completed} />}
+      </motion.div>
     </div>
   );
 };
