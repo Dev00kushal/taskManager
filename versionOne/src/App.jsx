@@ -4,6 +4,7 @@ import InputField from "./Components/InputField";
 import Button from "./Components/Button";
 import Todo from "./Components/Todo";
 import CompletedTodo from "./Components/CompletedTodo";
+import RandomQuotes from "./Components/RandomQuotes";
 
 const App = () => {
   const [todo, setTodo] = useState([]);
@@ -51,7 +52,8 @@ const App = () => {
         setTodo(updatedTodo);
         setId(0);
       }
-
+      // basically it is here deleted so it is also there deleted
+      setStatus(!status);
       setInput("");
       setBtn("Add");
     }
@@ -64,7 +66,6 @@ const App = () => {
       })
     );
     setInput(" ");
-    setStatus(!status);
     setBtn("Add");
   };
 
@@ -76,6 +77,7 @@ const App = () => {
         transition={{ duration: 0.5 }}
         className="flex space-x-5"
       >
+        <RandomQuotes />
         <InputField input={input} setInput={setInput} addTodo={addTodo} />
         <Button
           addTodo={addTodo}
@@ -147,7 +149,9 @@ const App = () => {
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.5 }}
       >
-        {status && <CompletedTodo completed={completed} />}
+        {status && (
+          <CompletedTodo completed={completed} />
+        )}
       </motion.div>
     </div>
   );
