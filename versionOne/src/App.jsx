@@ -64,7 +64,7 @@ const App = () => {
       );
       updatedCompleted.splice(completedIndex, 1);
     }
-
+    setStatus(!status);
     setCompleted(updatedCompleted);
   };
 
@@ -78,6 +78,7 @@ const App = () => {
         setTodo(updatedTodo);
         setId(0);
       }
+      
       setInput("");
       setBtn("Add");
     }
@@ -117,8 +118,8 @@ const App = () => {
         className="mt-5 card w-full bg-base-100 shadow-xl p-4"
       >
         <AnimatePresence>
-          {todo.length !== 0 ? (
-            todo.map((items, index) => (
+          {todo?.length !== 0 ? (
+            todo?.map((items, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: -50 }}
