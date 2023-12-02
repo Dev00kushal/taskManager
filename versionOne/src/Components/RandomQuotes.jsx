@@ -25,20 +25,16 @@ const RandomQuotes = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="random-quotes-container bg-gray-100 p-5 rounded-md shadow-md mx-4 md:mx-20 lg:mx-32 xl:mx-48 mt-8 mb-8"
     >
-      <div className="text-center">
-        <h1 className="text-3xl font-bold mb-4 text-gray-800">Random Quote Generator</h1>
-        <motion.blockquote
-          className="text-lg text-gray-700"
-          animate={{ scale: [0.8, 1] }}
-          transition={{ duration: 0.5 }}
-        >
-          {quote && (
-            <span className="badge primary-badge p-6 md:p-10">{quote}</span>
-          )}
-        </motion.blockquote>
-      </div>
+      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold mb-4 text-purple-800-800">
+        Random Quote
+      </h1>
+
+      {quote && (
+        <span className="badge primary-badge p-3 sm:p-4 md:p-6 lg:p-8 xl:p-10">
+          {quote}
+        </span>
+      )}
     </motion.div>
   );
 };
