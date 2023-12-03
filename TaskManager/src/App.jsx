@@ -27,7 +27,7 @@ const App = () => {
       setCompleted(JSON.parse(storedCompleted));
     }
 
-    if (storedCheckboxStates) {
+    if (!storedCheckboxStates) {
       setCheckboxStates(JSON.parse(storedCheckboxStates));
     }
   }, []);
