@@ -1,10 +1,12 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const CompletedTodo = ({ completed }) => {
+import Button from "./Button";
+const CompletedTodo = ({ completed, deletedTodo }) => {
   return (
     <div className="completed-todo-container">
-      <h1 className="text-3xl font-bold mb-4 text-purple-800">Completed Todo</h1>
+      <h1 className="text-3xl font-bold mb-4 text-purple-800">
+        Completed Todo
+      </h1>
 
       <AnimatePresence>
         <motion.div
@@ -21,6 +23,11 @@ const CompletedTodo = ({ completed }) => {
               whileTap={{ scale: 0.95 }}
             >
               <span>{value}</span>
+              <Button
+                deletedTodo={()=> deletedTodo(index)}
+                btnColor={"btn-error"}
+                btnName={"Delete"}
+              />
             </motion.div>
           ))}
         </motion.div>

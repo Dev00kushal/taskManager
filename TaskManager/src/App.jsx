@@ -78,12 +78,19 @@ const App = () => {
         setTodo(updatedTodo);
         setId(0);
       }
-      
+
       setInput("");
       setBtn("Add");
     }
   };
 
+  const deletedTodo = (index) => {
+    setCompleted(
+      completed?.filter((_, idx) => {
+        return index !== idx;
+      })
+    );
+  };
   const deleteTodo = (index) => {
     setTodo(
       todo?.filter((_, idx) => {
@@ -174,7 +181,9 @@ const App = () => {
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.5 }}
       >
-        {status && <CompletedTodo completed={completed} />}
+        {status && (
+          <CompletedTodo completed={completed} deletedTodo={deletedTodo} />
+        )}
       </motion.div>
     </div>
   );
